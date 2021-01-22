@@ -1,0 +1,8 @@
+# To update, go to the Sealed Secrets github releases page and download
+# the controller.yaml from the official release.  The URL looks like this:
+#
+#   https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.13.1/controller.yaml
+#
+# DO NOT MODIFY that manifest; instead, patch as necessary (currently not necessary!)
+resources:
+- controller.yaml
