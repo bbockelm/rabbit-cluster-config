@@ -16,5 +16,7 @@ spec:
             - --git-branch=master
             - --git-path=manifests/production
             - --git-user=bbockelm
+            - --git-poll-interval=1m
+            - --sync-interval=5m
             - --git-email=bbockelm@users.noreply.github.com
             - --git-url=git@github.com:bbockelm/rabbit-cluster-config
