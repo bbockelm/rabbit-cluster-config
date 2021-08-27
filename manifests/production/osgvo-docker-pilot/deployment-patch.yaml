@@ -12,7 +12,7 @@ spec:
           resources:
             limits:
               memory: "14Gi"
-              cpu: "3.5"
+              cpu: "3.35"
           env:
             - name: GLIDEIN_ResourceName
               value: "RABBIT-OSG-BACKFILL-PROD"
