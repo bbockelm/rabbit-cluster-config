@@ -22,3 +22,5 @@ spec:
               value: "4"
             - name: MEMORY
               value: "14000"
+            - name: CVMFSEXEC_REPOS
+              value: "oasis.opensciencegrid.org singularity.opensciencegrid.org"
