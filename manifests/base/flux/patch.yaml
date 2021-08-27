@@ -20,3 +20,4 @@ spec:
             - --sync-interval=5m
             - --git-email=bbockelm@users.noreply.github.com
             - --git-url=git@github.com:bbockelm/rabbit-cluster-config
+            - –registry-disable-scanning=true
