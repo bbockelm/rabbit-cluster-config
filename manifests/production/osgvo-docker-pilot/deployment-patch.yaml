@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: osgvo-docker-pilot
 spec:
-  replicas: 4
+  replicas: 2
   template:
     spec:
       containers:
@@ -11,14 +11,14 @@ spec:
           image: hub.opensciencegrid.org/opensciencegrid/osgvo-docker-pilot:testing-20210827-1744
           resources:
             limits:
-              memory: "2Gi"
-              cpu: "2"
+              memory: "14Gi"
+              cpu: "3.5"
           env:
             - name: GLIDEIN_ResourceName
               value: "RABBIT-OSG-BACKFILL-PROD"
             - name: GLIDEIN_Start_Extra
               value: 'ProjectName == "TG-CHE200122"'
             - name: NUM_CPUS
-              value: "2"
+              value: "4"
             - name: MEMORY
-              value: "2000"
+              value: "14000"
