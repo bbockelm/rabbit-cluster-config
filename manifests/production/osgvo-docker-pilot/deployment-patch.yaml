@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: osgvo-docker-pilot
+spec:
+  template:
+    spec:
+      containers:
+        - name: osgvo-docker-pilot
+          image: dockerreg.chtc.wisc.edu/matyasosg/osgvo-docker-pilot:SOFTWARE-4634.resourcelimit
+          resources:
+            limits:
+              memory: "8Gi"
+              cpu: "5"
+          env:
+            - name: GLIDEIN_ResourceName
+              value: "RABBIT-OSG-BACKFILL-PROD"
+            - name: GLIDEIN_Start_Extra
+              value: 'ProjectName == "TG-CHE200122"'
+            - name: NUM_CPUS
+              value: "2"
+            - name: MEMORY
+              value: "2000"

@@ -1,0 +1,10 @@
+namespace: osg
+
+bases:
+  - ../../base/osgvo-docker-pilot
+
+resources:
+  - osgvo-pilot-creds-secret.yaml
+
+patchesStrategicMerge:
+  - deployment-patch.yaml

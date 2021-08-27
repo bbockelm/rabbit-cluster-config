@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: osgvo-docker-pilot
+  labels:
+    name: osgvo-docker-pilot
+  annotations:
+    fluxcd.io/automated: "true"
+spec:
+  selector:
+    matchLabels:
+      app: osgvo-docker-pilot
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: osgvo-docker-pilot
+    spec:
+      containers:  # {{{
+      - name: osgvo-docker-pilot
+        image: opensciencegrid/osgvo-docker-pilot:release-20210614-1957
+        #image: matyasosg/osgvo-docker-pilot:cvmfsexec
+        #image: matyasosg/osgvo-docker-pilot:pilotdir
+        imagePullPolicy: Always
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          ## for cvmfsexec and singularity
+          ## I need privileged for now instead of capabilities because there's no way to do the equivalent of
+          ## docker run's --device=/dev/fuse
+          ## Keep an eye on <https://github.com/kubernetes/kubernetes/issues/7890>
+          # capabilities:
+          #   add: ["DAC_OVERRIDE", "DAC_READ_SEARCH", "SETGID", "SETUID", "SYS_ADMIN", "SYS_CHROOT", "SYS_PTRACE"]
+          privileged: true
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        env:
+          - name: GLIDEIN_Site
+            value: "CHTC"
+          - name: GLIDEIN_ResourceName
+            value: "TIGER-OSG-BACKFILL"
+          - name: GLIDEIN_Start_Extra
+            value: "WantTigerBackfill == True"
+          - name: TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: osgvo-pilot-creds
+                key: token
+          - name: CVMFSEXEC_REPOS
+            value: "oasis.opensciencegrid.org"
+            # ^^ space separated
+      # }}} containers
+      volumes:
+        # for cvmfsexec:
+        - name: dev-fuse
+          hostPath:
+            path: /dev/fuse

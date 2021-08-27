@@ -2,3 +2,7 @@
 bases:
 - ../base/flux
 - ../base/sealed-secrets
+- osgvo-docker-pilot
+
+resources:
+- namespace.yaml
